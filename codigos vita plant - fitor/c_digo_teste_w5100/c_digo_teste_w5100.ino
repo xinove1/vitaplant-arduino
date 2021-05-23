@@ -16,6 +16,9 @@ struct Data {
     int led;
 };
 
+StaticJsonDocument<256> deserialize(String input);
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -40,10 +43,12 @@ void setup() {
 
     Data DadosServer;
     String c ;
+    
     while(client.connected()) {
       if(client.available()){
         // read an incoming byte from the server and print it to serial monitor:
-        c =+ client.read();
+        char ca = client.read();
+        c =+ ca;
         //Serial.print(c);
         //StaticJsonDocument<256> doc;
         //deserializeJson(doc, c);
@@ -55,7 +60,9 @@ void setup() {
       }
       Serial.println(c);
     }
+    StaticJsonDocument<256> doc = deserialize(c);
 
+    
     // the server's disconnected, stop the client:
     client.stop();
     Serial.println();
@@ -70,7 +77,7 @@ void loop() {
 
 }
 
-StaticJsonDocument<256> deserialize(char* input){
+StaticJsonDocument<256> deserialize(String input){
   // declara o documento json com tamanho 256 bytes
   StaticJsonDocument<256> doc;
   
