@@ -49,20 +49,16 @@ void setup() {
         // read an incoming byte from the server and print it to serial monitor:
         char ca = client.read();
         c += ca;
-        //Serial.print(c);
-        //StaticJsonDocument<256> doc;
-        //deserializeJson(doc, c);
-        //DadosServer.bomba = doc["bomba"];
-        //DadosServer.led = doc["led"];
-
-        //Serial.print(DadosServer.bomba);
-        //Serial.print(DadosServer.led);
       }
      
     }
-    Serial.println(c);
+    //Serial.println(c);
     StaticJsonDocument<256> doc = deserialize(c);
-    //Serial.println(doc["led"]);
+    DadosServer.bomba = doc["bomba"];
+    DadosServer.led = doc["led"];
+
+    Serial.print(DadosServer.bomba);
+    Serial.print(DadosServer.led);
     
     // the server's disconnected, stop the client:
     client.stop();
