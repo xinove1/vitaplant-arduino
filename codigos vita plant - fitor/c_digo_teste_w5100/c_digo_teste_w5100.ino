@@ -52,13 +52,18 @@ void setup() {
       }
      
     }
-    //Serial.println(c);
+
+    int a = c.indexOf("{");
+    
+    Serial.println(a);
+    
+    //Serial.println(c.c_str(c.indexOf("{"), c.indexOf("}"));
     StaticJsonDocument<256> doc = deserialize(c);
     DadosServer.bomba = doc["bomba"];
     DadosServer.led = doc["led"];
 
-    Serial.print(DadosServer.bomba);
-    Serial.print(DadosServer.led);
+    //Serial.print(DadosServer.bomba);
+    //Serial.print(DadosServer.led);
     
     // the server's disconnected, stop the client:
     client.stop();
