@@ -1,6 +1,7 @@
 #include <Ethernet.h>
 #include <SPI.h>
 #include <ArduinoJson.h>
+#include <string.h>
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 
@@ -54,10 +55,10 @@ void setup() {
     }
 
     int a = c.indexOf("{");
+    int b = c.indexOf("}");
+   
     
-    Serial.println(a);
-    
-    //Serial.println(c.c_str(c.indexOf("{"), c.indexOf("}"));
+    Serial.println(c.substring(a, b));
     StaticJsonDocument<256> doc = deserialize(c);
     DadosServer.bomba = doc["bomba"];
     DadosServer.led = doc["led"];
