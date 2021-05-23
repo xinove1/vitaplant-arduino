@@ -39,12 +39,12 @@ void setup() {
     client.println(); // end HTTP header
 
     Data DadosServer;
-
+    char* c ;
     while(client.connected()) {
       if(client.available()){
         // read an incoming byte from the server and print it to serial monitor:
-        char c = client.read();
-        Serial.print(c);
+        c =+ client.read();
+        //Serial.print(c);
         //StaticJsonDocument<256> doc;
         //deserializeJson(doc, c);
         //DadosServer.bomba = doc["bomba"];
@@ -53,6 +53,7 @@ void setup() {
         //Serial.print(DadosServer.bomba);
         //Serial.print(DadosServer.led);
       }
+      Serial.println(c);
     }
 
     // the server's disconnected, stop the client:
@@ -62,6 +63,7 @@ void setup() {
   } else {// if not connected:
     Serial.println("connection failed");
   }
+  
 }
 
 void loop() {
