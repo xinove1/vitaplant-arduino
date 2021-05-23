@@ -27,8 +27,10 @@ void setup() {
 
   // connect to web server on port 80:
   if(client.connect(HOST_NAME, HTTP_PORT)) {
+    
     // if connected:
     Serial.println("Connected to server");
+    
     // make a HTTP request:
     // send HTTP header
     client.println(HTTP_METHOD + " " + PATH_NAME + " HTTP/1.1");
@@ -41,7 +43,8 @@ void setup() {
     while(client.connected()) {
       if(client.available()){
         // read an incoming byte from the server and print it to serial monitor:
-        //char c = client.read();
+        char c = client.read();
+        Serial.print(c);
         //StaticJsonDocument<256> doc;
         //deserializeJson(doc, c);
         //DadosServer.bomba = doc["bomba"];
@@ -64,8 +67,21 @@ void setup() {
 void loop() {
 
 }
-/*
-void json(){
-  StaticJsonDocument<256> doc;
 
-}*/ 
+StaticJsonDocument<256> deserialize(char* input){
+  // declara o documento json com tamanho 256 bytes
+  StaticJsonDocument<256> doc;
+  
+  // O metodo de deserelializar retorna um erro, aqui chamamaos o metodo e guardamos o retorno
+  DeserializationError error = deserializeJson(doc, input);
+
+  // verifica se occorreu um erro 
+  if (error) {
+     Serial.print("Error: ");
+     Serial.println(error.c_str());
+     return;
+    }
+    
+  return doc;
+ 
+  }
