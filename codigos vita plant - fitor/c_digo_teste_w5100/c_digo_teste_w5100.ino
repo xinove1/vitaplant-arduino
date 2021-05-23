@@ -48,7 +48,7 @@ void setup() {
       if(client.available()){
         // read an incoming byte from the server and print it to serial monitor:
         char ca = client.read();
-        c =+ ca;
+        c += ca;
         //Serial.print(c);
         //StaticJsonDocument<256> doc;
         //deserializeJson(doc, c);
