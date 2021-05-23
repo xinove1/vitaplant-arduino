@@ -39,7 +39,7 @@ void setup() {
     client.println(); // end HTTP header
 
     Data DadosServer;
-    char* c ;
+    String c ;
     while(client.connected()) {
       if(client.available()){
         // read an incoming byte from the server and print it to serial monitor:
