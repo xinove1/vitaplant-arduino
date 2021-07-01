@@ -30,7 +30,7 @@ void setup() {
 
 void loop() {
   String data_send;
-  fill_data_send(data_send);
+  fill_data_send(&data_send);
   Serial.println(data_send);
   delay(60000);
   /*if(send_data())
@@ -55,7 +55,7 @@ int send_data(void)
 
 
       String data_send;
-      fill_data_send(data_send);
+      fill_data_send(&data_send);
       client.println(data_send);      
       
     }
@@ -68,11 +68,11 @@ void receive_data(void)
   
 }
 
-void fill_data_send(String data_send)
+void fill_data_send(String *data_send)
 {
   //StaticJsonDocument<256> doc;
   //doc["led"] = LED;
   //doc["humidity"] = analogRead(SensorHL);
   //serializeJson(doc, data_send);
-  data_send = String("{\"led\":") + String(LED) + String(",\"humidity\":") + String(analogRead(SensorHL))+ String("}");
+  *data_send = String("{\"led\":") + String(LED) + String(",\"humidity\":") + String(analogRead(SensorHL))+ String("}");
 }
