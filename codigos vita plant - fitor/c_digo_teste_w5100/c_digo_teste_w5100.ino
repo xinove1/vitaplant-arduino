@@ -58,7 +58,7 @@ void setup() {
     int b = c.indexOf("}");
    
     
-    Serial.println(c.substring(a, b));
+    Serial.println(c.substring(a, b+1));
     StaticJsonDocument<256> doc = deserialize(c);
     DadosServer.bomba = doc["bomba"];
     DadosServer.led = doc["led"];
