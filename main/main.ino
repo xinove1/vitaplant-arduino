@@ -14,7 +14,7 @@ String HTTP_METHOD = "GET"; // or "POST"
 char   HOST_NAME[] = "a3897fe14b76.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
-int LED = 0;
+int LED[3] = {0, 0, 0};
 
 void setup() {
   Serial.begin(9600);
@@ -74,5 +74,13 @@ void fill_data_send(String *data_send)
   //doc["led"] = LED;
   //doc["humidity"] = analogRead(SensorHL);
   //serializeJson(doc, data_send);
-  *data_send = String("{\"led\":") + String(LED) + String(",\"humidity\":") + String(analogRead(SensorHL))+ String("}");
+  *data_send = String("{\"ledR\":") 
+               + String(LED[0]) 
+               +",\"ledG\":" 
+               + String(LED[1])
+               +",\"ledB\":" 
+               + String(LED[2])
+               + ",\"humidity\":"
+               + String(analogRead(SensorHL))
+               + "}";
 }
