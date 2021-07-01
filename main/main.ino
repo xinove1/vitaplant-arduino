@@ -14,7 +14,7 @@ String HTTP_METHOD = "GET"; // or "POST"
 char   HOST_NAME[] = "a3897fe14b76.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
-int LED;
+int LED = 0;
 
 void setup() {
   Serial.begin(9600);
