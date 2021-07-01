@@ -29,13 +29,11 @@ void setup() {
 }
 
 void loop() {
-  String data_send;
-  fill_data_send(&data_send);
-  Serial.println(data_send);
-  delay(60000);
-  /*if(send_data())
+
+  
+  if(send_data())
     receive_data();
-*/
+  delay(60000);
 }
 
 
@@ -83,4 +81,37 @@ void fill_data_send(String *data_send)
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
+}
+
+void    parse_http(char c[], char dest[4][10])
+{
+    int beg = 0;
+    int i = 0;
+    int j = 0;
+    
+    while (c[i] != '\n')
+    {
+        if (c[i] == ' ')
+        {
+            c[i] = '\0';
+            fill(&c[beg], &dest[j][0]);
+            j++; 
+            i = i + 1;
+            beg = i;
+            continue;
+        }
+        i++;
+    }
+}
+
+void    fill(char *c, char *dest)
+{
+    //char cc[20];
+    int i = 0;
+    while (c[i])
+    {
+        dest[i] = c[i];
+        i++;
+    }
+    //dest = cc;
 }
