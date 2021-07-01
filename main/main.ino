@@ -29,7 +29,7 @@ void setup() {
 }
 
 void loop() {
-  char data_send[100];
+  String data_send;
   fill_data_send(data_send);
   Serial.println(data_send);
   delay(60000);
