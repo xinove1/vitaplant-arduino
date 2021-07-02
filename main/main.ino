@@ -10,7 +10,7 @@ int rele = 7;
 EthernetClient client;
 
 int    HTTP_PORT   = 80;
-String HTTP_METHOD = "GET"; // or "POST"
+String HTTP_METHOD = "POST"; // or "POST"
 char   HOST_NAME[] = "a3897fe14b76.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
@@ -48,6 +48,7 @@ int send_data(void)
       // send HTTP header
       client.println(HTTP_METHOD + " " + PATH_NAME + " HTTP/1.1");
       client.println("Host: " + String(HOST_NAME));
+      client.println("Content-Type: application/json");
       client.println("Connection: close");
       client.println(); // end HTTP header
 
