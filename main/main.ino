@@ -43,18 +43,18 @@ int send_data(void)
       
       // if connected:
       Serial.println("Connected to server");
-      
-      // make a HTTP request:
-      // send HTTP header
-      client.println("POST " + PATH_NAME + " HTTP/1.1");
-     // client.println("Host: " + String(HOST_NAME));
-      client.println("Content-Type: application/json");
-      //client.println("Connection: close");
-      client.println(); // end HTTP header
-
 
       String data_send;
       fill_data_send(&data_send);
+      // make a HTTP request:
+      // send HTTP header
+      client.println("POST " + PATH_NAME + " HTTP/1.1");
+      client.println("Host: " + String(HOST_NAME));
+      client.println("Content-Type: application/json");
+      client.println("Content-Length: " + data_send.length());
+      //client.println("Connection: close");
+      client.println(); // end HTTP header
+
       Serial.println(data_send);
       client.println(data_send);      
       
