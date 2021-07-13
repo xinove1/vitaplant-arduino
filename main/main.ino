@@ -55,7 +55,7 @@ int send_data(void)
       //client.println("Connection: close");
       client.println(); // end HTTP header
 
-      Serial.println(data_send);
+      //Serial.println(data_send);
       client.println(data_send);      
       
     }
