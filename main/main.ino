@@ -52,7 +52,7 @@ int send_data(void)
       //client.println("Host: " + String(HOST_NAME));
       client.println("Content-Type: application/json");
       //client.println("Content-Length: " + data_send.length());
-      //client.println("Connection: close");
+      client.println("Connection: close");
       client.println(); // end HTTP header
 
       //Serial.println(data_send);
