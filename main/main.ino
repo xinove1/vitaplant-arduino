@@ -47,7 +47,7 @@ int send_data(void)
       // make a HTTP request:
       // send HTTP header
       client.println("POST " + PATH_NAME + " HTTP/1.1");
-      client.println("Host: " + String(HOST_NAME));
+     // client.println("Host: " + String(HOST_NAME));
       client.println("Content-Type: application/json");
       //client.println("Connection: close");
       client.println(); // end HTTP header
