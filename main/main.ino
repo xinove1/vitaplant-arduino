@@ -55,6 +55,7 @@ int send_data(void)
 
       String data_send;
       fill_data_send(&data_send);
+      Serial.println(data_send);
       client.println(data_send);      
       
     }
