@@ -66,6 +66,7 @@ int send_data(void)
           c += ca;
         }
       }
+      Serial.println(c);
     }
     
   return(0);
