@@ -11,7 +11,7 @@ EthernetClient client;
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "POST"; // or "POST"
-char   HOST_NAME[] = "a3897fe14b76.ngrok.io"; // hostname of web server:
+char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
 int LED[3] = {0, 0, 0};
@@ -74,6 +74,9 @@ void fill_data_send(String *data_send)
   //doc["led"] = LED;
   //doc["humidity"] = analogRead(SensorHL);
   //serializeJson(doc, data_send);
+  LED[0] = 10;
+  LED[1] = 20;
+  LED[2] = 30;
   *data_send = String("{\"ledR\":") 
                + String(LED[0]) 
                +",\"ledG\":" 
