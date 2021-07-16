@@ -67,7 +67,7 @@ int send_data(void)
         }
       }
       
-      Serial.println("sexo:" + parse_http(c));
+      Serial.println("sexo2.0:" + parse_http(c));
     }
     
   return(0);
@@ -103,13 +103,13 @@ String    parse_http(String c)
     int beg = 0;
     int i = 0;
     int j = 0;
-    char dest[4][10];
+    String dest[4];
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
         {
             c[i] = '\0';
-            fill(&c[beg], &dest[j][0]);
+            dest[j] = fill(&c[beg]);
             j++; 
             i = i + 1;
             beg = i;
@@ -120,14 +120,15 @@ String    parse_http(String c)
     return(dest[3]);
 }
 
-void    fill(char *c, char *dest)
+String    fill(char *c)
 {
     //char cc[20];
     int i = 0;
+    char dest[10];
     while (c[i])
     {
         dest[i] = c[i];
         i++;
     }
-    //dest = cc;
+    return (dest);
 }
