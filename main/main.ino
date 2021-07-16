@@ -127,7 +127,7 @@ String    fill(char *c)
     //char cc[20];
     int i = 0;
     char dest[3];
-    while (c[i])
+    while (c[i] && i < 3)
     {
         dest[i] = c[i];
         i++;
