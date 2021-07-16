@@ -117,7 +117,7 @@ String    parse_http(String c)
         }
         i++;
     }
-    return(dest[3]);
+    return(dest[1]);
 }
 
 String    fill(char *c)
