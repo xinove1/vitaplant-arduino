@@ -57,9 +57,17 @@ int send_data(void)
 
       //Serial.println(data_send);
       client.println(data_send);      
-      
+      String c ;
+    
+      while(client.connected()) {
+        if(client.available()){
+          // read an incoming byte from the server and print it to serial monitor:
+          char ca = client.read();
+          c += ca;
+        }
+      }
     }
-  
+    
   return(0);
 }
 
