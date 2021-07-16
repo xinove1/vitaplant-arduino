@@ -60,10 +60,12 @@ int send_data(void)
       String c ;
     
       while(client.connected()) {
-        if(client.available()){
+        int i = 0;
+        if(client.available() && i < 10){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
           c += ca;
+          i++;
         }
       }
       
@@ -124,7 +126,7 @@ String    fill(char *c)
 {
     //char cc[20];
     int i = 0;
-    char dest[10];
+    char dest[3];
     while (c[i])
     {
         dest[i] = c[i];
