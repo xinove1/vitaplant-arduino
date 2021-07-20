@@ -97,19 +97,23 @@ void receive_data(void)
 
       String c;    
       while(client.connected()) {
-        int i = 0;
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
-          if (ca == '\n' && i != 0)
-            break;
           c += ca;
-          i++;
         }
       }
-      
-      Serial.println("sexo2.0:" + parse_http(c) + "B");
-      Serial.println("sexo3.0\n" + c);
+
+      String cc = parse_http(c);
+      char htppresponse[3];
+      int i = 0;
+      while(cc[i] && i < 3)
+      {
+        htppresponse[i] = c[i];
+        i++;
+      }
+      Serial.println("sexo2.0:" + cc + "B");
+      Serial.println("sexo3.0\n" + String(htppresponse));
     }
 }
 
