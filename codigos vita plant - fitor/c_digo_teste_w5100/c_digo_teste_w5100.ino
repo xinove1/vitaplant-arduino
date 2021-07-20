@@ -9,7 +9,7 @@ EthernetClient client;
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "GET"; // or "POST"
-char   HOST_NAME[] = "c0d745a96603.ngrok.io"; // hostname of web server:
+char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
 struct Data {
@@ -59,10 +59,12 @@ void setup() {
    
     
     //Serial.println(c.substring(a, b+1));
-    StaticJsonDocument<256> doc;
+    Serial.print("\n" + c + "\n");
+    StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
     DadosServer.bomba = doc["bomba"];
     DadosServer.led = doc["led"];
+    Serial.print("\n 2:" + c + "\n");
 
     Serial.print(DadosServer.bomba);
     Serial.print(DadosServer.led);
