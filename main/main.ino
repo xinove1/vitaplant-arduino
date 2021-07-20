@@ -75,9 +75,12 @@ int send_data(void)
       
       Serial.println("sexo2.0:" + parse_http(c));
       if (parse_http(c) == "201")
+      {
+        Serial.println("201");
         return(1);
+      }
     }
-    
+  Serial.println("200");
   return(0);
 }
 
