@@ -59,7 +59,7 @@ void setup() {
    
     
     //Serial.println(c.substring(a, b+1));
-    StaticJsonDocument<256> doc = deserializeJson(doc, input);
+    StaticJsonDocument<256> doc = deserializeJson(doc, c);
     DadosServer.bomba = doc["bomba"];
     DadosServer.led = doc["led"];
 
