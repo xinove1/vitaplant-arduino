@@ -3,6 +3,8 @@
 #include <ArduinoJson.h>
 #include <string.h>
 
+
+
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 int SensorHL = A0;
 int rele = 7;
@@ -152,7 +154,7 @@ String    parse_http(String c)
     int beg = 0;
     int i = 0;
     int j = 0;
-    char dest[4][3];
+    char dest[4];
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
@@ -169,7 +171,7 @@ String    parse_http(String c)
     return(String(dest[1]));
 }
 
-String    fill(char *c)
+char    *fill(char *c)
 {
     //char cc[20];
     int i = 0;
