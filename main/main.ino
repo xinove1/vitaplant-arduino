@@ -9,10 +9,10 @@ int rele = 7;
 
 EthernetClient client;
 
-struct data {
+/*struct data {
   int bomb;
   int led;
-};
+};*/
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "POST"; // or "POST"
@@ -81,7 +81,7 @@ int send_data(void)
 }
 
 void receive_data(void)
-{
+{/*
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
@@ -106,7 +106,7 @@ void receive_data(void)
       }
       
       Serial.println("sexo2.0:" + parse_http(c) + "B");
-    }
+    }*/
 }
 
 void fill_data_send(String *data_send)
