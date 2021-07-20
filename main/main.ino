@@ -154,7 +154,7 @@ String    parse_http(String c)
     int beg = 0;
     int i = 0;
     int j = 0;
-    char dest[4];
+    char *dest[4];
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
