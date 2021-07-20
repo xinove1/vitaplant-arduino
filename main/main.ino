@@ -105,15 +105,15 @@ void receive_data(void)
       }
 
       String cc = parse_http(c);
-      char htppresponse[3];
+      /*char htppresponse[3];
       int i = 0;
       while(cc[i] && i < 3)
       {
-        htppresponse[i] = c[i];
+        htppresponse[i] = cc[i];
         i++;
-      }
+      }*/
       Serial.println("sexo2.0:" + cc + "B");
-      Serial.println("sexo3.0\n" + String(htppresponse));
+      //Serial.println("sexo3.0\n" + String(htppresponse));
     }
 }
 
