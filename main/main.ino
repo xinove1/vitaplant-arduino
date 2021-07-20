@@ -152,7 +152,7 @@ String    parse_http(String c)
     int beg = 0;
     int i = 0;
     int j = 0;
-    String dest[4];
+    char dest[4][3];
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
@@ -166,7 +166,7 @@ String    parse_http(String c)
         }
         i++;
     }
-    return(dest[1]);
+    return(String(dest[1]));
 }
 
 String    fill(char *c)
