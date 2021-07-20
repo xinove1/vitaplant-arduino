@@ -83,70 +83,38 @@ int send_data(void)
 
 void receive_data(void)
 {
-    // connect to web server on port 80:
   if(client.connect(HOST_NAME, HTTP_PORT)) {
-    
-    // if connected:
-    Serial.println("Connected to server");
-    
-    // make a HTTP request:
-    // send HTTP header
-    client.println("GET " + PATH_NAME + " HTTP/1.1");
-    client.println("Host: " + String(HOST_NAME));
-    client.println("Connection: close");
-    client.println(); // end HTTP header
+      
+      // if connected:
+      Serial.println("Connected to server");
 
-    Data DadosServer;
-    String c ;
+      String data_send;
+      fill_data_send(&data_send);
+      // make a HTTP request:
+      // send HTTP header
+      client.println("GET " + PATH_NAME + " HTTP/1.1");
+      client.println("Host: " + String(HOST_NAME));
+      client.println("Content-Type: application/json");
+      client.println("Content-Length: " + String(data_send.length()));
+      client.println("Connection: close");
+      client.println(); // end HTTP header
+
+      //Serial.println(data_send);
+      client.println(data_send);      
+      String c ;
     
-    while(client.connected()) {
-      if(client.available()){
-        // read an incoming byte from the server and print it to serial monitor:
-        char ca = client.read();
-        c += ca;
+      while(client.connected()) {
+        int i = 0;
+        if(client.available() && i < 10){
+          // read an incoming byte from the server and print it to serial monitor:
+          char ca = client.read();
+          c += ca;
+          i++;
+        }
       }
-     
+      
+      Serial.println("sexo5.0:" + parse_http(c));
     }
-
-    int a = c.indexOf("{");
-    int b = c.indexOf("}");
-   
-    
-    Serial.println(c.substring(a, b+1));
-    StaticJsonDocument<256> doc = deserialize(c);
-    DadosServer.bomba = doc["bomba"];
-    DadosServer.led = doc["led"];
-
-    //Serial.print(DadosServer.bomba);
-    //Serial.print(DadosServer.led);
-    
-    // the server's disconnected, stop the client:
-    client.stop();
-    Serial.println();
-    Serial.println("disconnected");
-  } else {// if not connected:
-    Serial.println("connection failed");
-  }
-  
-}
-
-StaticJsonDocument<256> deserialize(String input)
-{
-  // declara o documento json com tamanho 256 bytes
-  StaticJsonDocument<256> doc;
-  
-  // O metodo de deserelializar retorna um erro, aqui chamamaos o metodo e guardamos o retorno
-  DeserializationError error = deserializeJson(doc, input);
-
-  // verifica se occorreu um erro 
-  if (error) {
-     Serial.print("Error: ");
-     Serial.println(error.c_str());
-     return;
-    }
-    
-  return doc;
- 
 }
 
 void bomba(int mili)
