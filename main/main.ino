@@ -36,8 +36,9 @@ void setup() {
 void loop() {
 
   
-  if(send_data())
-    receive_data();
+ // if(send_data())
+   // receive_data();
+  receive_data();
   delay(60000);
 }
 
@@ -81,7 +82,7 @@ int send_data(void)
 }
 
 void receive_data(void)
-{/*
+{
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
@@ -94,19 +95,20 @@ void receive_data(void)
       client.println("Connection: close");
       client.println(); // end HTTP header
 
-      //Serial.println(data_send);   
-      String c ;
-    
+      String c;    
       while(client.connected()) {
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
+          if (ca == '\n')
+            break;
           c += ca;
         }
       }
       
       Serial.println("sexo2.0:" + parse_http(c) + "B");
-    }*/
+      Serial.println("sexo3.0\n" + c);
+    }
 }
 
 void fill_data_send(String *data_send)
