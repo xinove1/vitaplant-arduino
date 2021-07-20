@@ -97,12 +97,14 @@ void receive_data(void)
 
       String c;    
       while(client.connected()) {
+        int i = 0;
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
-          if (ca == '\n')
+          if (ca == '\n' && i != 0)
             break;
           c += ca;
+          i++;
         }
       }
       
