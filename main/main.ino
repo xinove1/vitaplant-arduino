@@ -36,9 +36,15 @@ void setup() {
 void loop() {
 
   
- // if(send_data())
-   // receive_data();
-  receive_data();
+ if(send_data())
+ {
+    Serial.println("sera que vai?");
+ }
+ else
+ {
+   Serial.println("nao foi nao");
+ }
+  //receive_data();
   delay(60000);
 }
 
@@ -74,8 +80,12 @@ int send_data(void)
           i++;
         }
       }
-      
-      Serial.println("sexo2.0:" + parse_http(c) + "a");
+      if (parse_http(c) == "201")
+      {
+        Serial.println("201");
+        return(1);
+      }
+      //Serial.println("sexo2.0:" + parse_http(c) + "a");
     }
     
   return(0);
