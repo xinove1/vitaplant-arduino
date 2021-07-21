@@ -37,12 +37,13 @@ void setup() {
 void loop() {
 
   String httpRes = send_data();
+  String httpResParsed = parse_http(httpRes);
   Serial.println("httpRes:" + httpRes);
-  Serial.println("httpRes parsed:" + parse_http(httpRes));
+  Serial.println("httpRes parsed:" + httpResParsed);
   
-  if (parse_http(httpRes) == "201")
+  if (httpResParsed == "201")
   {
-    Serial.println("è igual a 201 o tal do parsed:" + parse_http(httpRes));
+    Serial.println("è igual a 201 o tal do parsed:" + httpResParsed);
     //receive_data();
   }
   delay(60000);
