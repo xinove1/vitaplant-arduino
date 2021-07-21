@@ -43,7 +43,6 @@ void loop() {
   
   if (httpResParsed == "201")
   {
-    Serial.println("è igual a 201 o tal do parsed:" + httpResParsed);
     receive_data();
   }
   delay(60000);
@@ -74,16 +73,16 @@ String send_data(void)
       //Serial.println(data_send);
       client.println(data_send);      
       
-      String fc ;
+      String c ;
       while(client.connected()) {
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
-          fc += ca;
+          c += ca;
         }
       }
-      Serial.println("fc:" + fc);
-      return(fc);
+     // Serial.println("c:" + c);
+      return(c);
       //Serial.println("sexo2.0:" + parse_http(c) + "a");
     }
 }
@@ -116,6 +115,7 @@ void receive_data(void)
    // Serial.println("\n" + c);
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
+    Serial.println(c);
     int bomb = doc["bomb"];
     int led = doc["led"];
     //Serial.println("\n 2:" + c + "\n");
