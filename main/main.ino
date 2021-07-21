@@ -41,8 +41,10 @@ void loop() {
   Serial.println("httpRes parsed:" + parse_http(httpRes));
   
   if (parse_http(httpRes) == "201")
+  {
     Serial.println("è igual a 201 o tal do parsed:" + parse_http(httpRes));
-
+    //receive_data();
+  }
   delay(60000);
 }
 
@@ -72,13 +74,11 @@ String send_data(void)
       client.println(data_send);      
       
       String fc ;
-      int i = 0;
       while(client.connected()) {
-        if(client.available() && i < 10){
+        if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
           fc += ca;
-          i++;
         }
       }
       Serial.println("fc:" + fc);
