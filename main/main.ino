@@ -93,7 +93,7 @@ void receive_data(void)
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
-      Serial.println("Connected to server");
+      //Serial.println("Connected to server");
 
       // make a HTTP request:
       // send HTTP header
@@ -113,7 +113,7 @@ void receive_data(void)
 
      dataReceive DadosServer;
     //Serial.println(c.substring(a, b+1));
-    Serial.println("\n" + c);
+   // Serial.println("\n" + c);
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
     DadosServer.bomb = doc["bomb"];
@@ -125,7 +125,6 @@ void receive_data(void)
     
     // the server's disconnected, stop the client:
     client.stop();
-    Serial.println();
     Serial.println("disconnected");
   } else {// if not connected:
     Serial.println("connection failed");
