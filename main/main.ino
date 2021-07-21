@@ -10,10 +10,10 @@ int rele = 7;
 
 EthernetClient client;
 
-/*struct data {
+struct dataReceive {
   int bomb;
   int led;
-};*/
+};
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "POST"; // or "POST"
@@ -44,7 +44,7 @@ void loop() {
   if (httpResParsed == "201")
   {
     Serial.println("è igual a 201 o tal do parsed:" + httpResParsed);
-    //receive_data();
+    receive_data();
   }
   delay(60000);
 }
@@ -111,17 +111,25 @@ void receive_data(void)
         }
       }
 
-      String cc = parse_http(c);
-      /*char htppresponse[3];
-      int i = 0;
-      while(cc[i] && i < 3)
-      {
-        htppresponse[i] = cc[i];
-        i++;
-      }*/
-      Serial.println("sexo2.0:" + cc + "B");
-      //Serial.println("sexo3.0\n" + String(htppresponse));
-    }
+     dataReceive DadosServer;
+    //Serial.println(c.substring(a, b+1));
+    Serial.println("\n" + c);
+    StaticJsonDocument<1000> doc;
+    deserializeJson(doc, c);
+    DadosServer.bomb = doc["bomb"];
+    DadosServer.led = doc["led"];
+    //Serial.println("\n 2:" + c + "\n");
+
+    Serial.print(String(DadosServer.bomb));
+    Serial.print(String(DadosServer.led));
+    
+    // the server's disconnected, stop the client:
+    client.stop();
+    Serial.println();
+    Serial.println("disconnected");
+  } else {// if not connected:
+    Serial.println("connection failed");
+  }
 }
 
 void fill_data_send(String *data_send)
