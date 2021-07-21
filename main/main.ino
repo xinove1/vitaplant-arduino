@@ -9,11 +9,11 @@ int SensorHL = A0;
 int rele = 7;
 
 EthernetClient client;
-
+/*
 struct dataReceive {
   int bomb;
   int led;
-};
+};*/
 
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "POST"; // or "POST"
@@ -111,17 +111,18 @@ void receive_data(void)
         }
       }
 
-     dataReceive DadosServer;
+    
     //Serial.println(c.substring(a, b+1));
    // Serial.println("\n" + c);
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
-    DadosServer.bomb = doc["bomb"];
-    DadosServer.led = doc["led"];
+    int bomb = doc["bomb"];
+    int led = doc["led"];
     //Serial.println("\n 2:" + c + "\n");
 
-    Serial.print(String(DadosServer.bomb));
-    Serial.print(String(DadosServer.led));
+    
+    Serial.println(String(bomb));
+    Serial.println(String(led));
     
     // the server's disconnected, stop the client:
     client.stop();
