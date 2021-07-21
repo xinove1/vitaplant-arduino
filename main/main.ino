@@ -43,6 +43,7 @@ void loop() {
 
 void send_data(void)
 {
+   String fc ;
     if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
@@ -61,25 +62,30 @@ void send_data(void)
 
       //Serial.println(data_send);
       client.println(data_send);      
-      String c ;
+ 
     
       while(client.connected()) {
         int i = 0;
         if(client.available() && i < 10){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
-          c += ca;
+          fc += ca;
           i++;
         }
       }
-      if (parse_http(c) == "201")
+      //Serial.println("sexo2.0:" + parse_http(c) + "a");
+    }
+      Serial.println("Antes if");
+      if (parse_http(fc) == "201")
       {
+        Serial.println("Antes chamada reiceive data");
+        receive_data();
         Serial.println("201");
       }
       else
         Serial.println("Deu ruim");
-      //Serial.println("sexo2.0:" + parse_http(c) + "a");
-    }
+      Serial.println("Pos if e else");
+
 }
 
 void receive_data(void)
