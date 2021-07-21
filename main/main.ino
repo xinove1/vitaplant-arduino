@@ -3,6 +3,7 @@
 #include <ArduinoJson.h>
 #include <string.h>
 
+
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 int SensorHL = A0;
 int rele = 7;
@@ -35,15 +36,16 @@ void setup() {
 
 void loop() {
 
-  send_data();
+  String httpRes = send_data();
+  Serial.println("httpRes:" + httpRes);
   //receive_data();
   delay(60000);
 }
 
 
-void send_data(void)
+String send_data(void)
 {
-   String fc ;
+  
     if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
@@ -62,8 +64,8 @@ void send_data(void)
 
       //Serial.println(data_send);
       client.println(data_send);      
- 
-    
+      
+      String fc ;
       while(client.connected()) {
         int i = 0;
         if(client.available() && i < 10){
@@ -73,19 +75,10 @@ void send_data(void)
           i++;
         }
       }
+      Serial.println("fc:" + fc);
+      return(fc);
       //Serial.println("sexo2.0:" + parse_http(c) + "a");
     }
-      Serial.println("Antes if");
-      if (parse_http(fc) == "201")
-      {
-        Serial.println("Antes chamada reiceive data");
-        receive_data();
-        Serial.println("201");
-      }
-      else
-        Serial.println("Deu ruim");
-      Serial.println("Pos if e else");
-
 }
 
 void receive_data(void)
