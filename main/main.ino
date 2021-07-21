@@ -35,21 +35,13 @@ void setup() {
 
 void loop() {
 
-  
- if(send_data())
- {
-    Serial.println("sera que vai?");
- }
- else
- {
-   Serial.println("nao foi nao");
- }
+  send_data();
   //receive_data();
   delay(60000);
 }
 
 
-int send_data(void)
+void send_data(void)
 {
     if(client.connect(HOST_NAME, HTTP_PORT)) {
       
@@ -83,12 +75,11 @@ int send_data(void)
       if (parse_http(c) == "201")
       {
         Serial.println("201");
-        return(1);
       }
+      else
+        Serial.println("Deu ruim");
       //Serial.println("sexo2.0:" + parse_http(c) + "a");
     }
-    
-  return(0);
 }
 
 void receive_data(void)
