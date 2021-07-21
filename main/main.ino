@@ -38,8 +38,11 @@ void loop() {
 
   String httpRes = send_data();
   Serial.println("httpRes:" + httpRes);
-  Serial.println("httpRes parsed:" + parse_http(httpRes)));
-  //receive_data();
+  Serial.println("httpRes parsed:" + parse_http(httpRes));
+  
+  if (parse_http(httpRes) == "201")
+    Serial.println("è igual a 201 o tal do parsed:" + parse_http(httpRes));
+
   delay(60000);
 }
 
@@ -52,8 +55,10 @@ String send_data(void)
       // if connected:
       Serial.println("Connected to server");
 
+      //Cria e empacta dados para envio
       String data_send;
       fill_data_send(&data_send);
+
       // make a HTTP request:
       // send HTTP header
       client.println("POST " + PATH_NAME + " HTTP/1.1");
@@ -67,8 +72,8 @@ String send_data(void)
       client.println(data_send);      
       
       String fc ;
+      int i = 0;
       while(client.connected()) {
-        int i = 0;
         if(client.available() && i < 10){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
