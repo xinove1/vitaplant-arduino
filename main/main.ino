@@ -38,6 +38,7 @@ void loop() {
 
   String httpRes = send_data();
   Serial.println("httpRes:" + httpRes);
+  Serial.println("httpRes parsed:" + parse_http(httpRes)));
   //receive_data();
   delay(60000);
 }
