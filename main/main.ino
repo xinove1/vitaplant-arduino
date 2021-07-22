@@ -75,7 +75,11 @@ void get_server()
                 s += c; 
             }     
         }
-        Serial.println(s);
+        StaticJsonDocument<1000> doc;
+        deserializeJson(doc, s);
+        int bomba = doc["bomb"];
+        Serial.println(String(bomba));
+        
     }
 }
 
