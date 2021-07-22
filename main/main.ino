@@ -36,21 +36,16 @@ void setup() {
 
 void loop() {
 
-  String httpRes = send_data();
-  String httpResParsed = parse_http(httpRes);
-  Serial.println("httpRes:" + httpRes);
-  Serial.println("httpRes parsed:" + httpResParsed);
-  
-  if (httpResParsed == "201")
+  for (int i = 0; i < 5; i++)
   {
-     Serial.println("inside if parsed:" + httpResParsed);
-    receive_data();
+    send_data();
+    delay(15000);
   }
-  delay(60000);
+  receive_data();
 }
 
 
-String send_data(void)
+void send_data(void)
 {
   
     if(client.connect(HOST_NAME, HTTP_PORT)) {
@@ -74,17 +69,18 @@ String send_data(void)
       //Serial.println(data_send);
       client.println(data_send);      
       
-      String c ;
+     /* String c ;
       while(client.connected()) {
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
           char ca = client.read();
           c += ca;
         }
-      }
+      }*/
      // Serial.println("c:" + c);
-      return(c);
+     // return(c);
       //Serial.println("sexo2.0:" + parse_http(c) + "a");
+      client.stop();
     }
 }
 
@@ -103,7 +99,7 @@ void receive_data(void)
       client.println("Connection: close");
       client.println(); // end HTTP header
 
-      String c;    
+      String c = "";    
       while(client.connected()) {
         if(client.available()){
           // read an incoming byte from the server and print it to serial monitor:
@@ -115,9 +111,9 @@ void receive_data(void)
     
     //Serial.println(c.substring(a, b+1));
    // Serial.println("\n" + c);
+    Serial.println(c);
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
-    Serial.println(c);
     int bomb = doc["bomb"];
     int led = doc["led"];
     //Serial.println("\n 2:" + c + "\n");
