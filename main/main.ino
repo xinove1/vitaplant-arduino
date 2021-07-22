@@ -27,11 +27,11 @@ void setup ()
     pinMode(pinLedG, OUTPUT);
     pinMode(pinLedB, OUTPUT);
 
-    if (Ethernet.begin(mac) == 0) 
+    /*if (Ethernet.begin(mac) == 0) 
     {
         Serial.println("Failed to obtaining an IP address using DHCP");
         while(true);
-    }
+    }*/
 }
 
 void loop()
@@ -102,7 +102,7 @@ void get_server()
 
 void bomba_ligar(int milisec)
 {
-    Serial.println("Bomba" + String(bomba));
+    Serial.println("Bomba" + String(milisec));
     digitalWrite(rele, HIGH);
     delay(milisec);
     digitalWrite(rele, LOW);
