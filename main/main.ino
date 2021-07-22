@@ -81,11 +81,10 @@ void send_data(void)
      // Serial.println("c:" + c);
      // return(c);
       //Serial.println("sexo2.0:" + parse_http(c) + "a");
-      client.stop();
     }
 }
 
-void receive_data(void)
+void receive_data()
 {
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
@@ -107,18 +106,12 @@ void receive_data(void)
           c += ca;
         }
       }
-
-    
-    //Serial.println(c.substring(a, b+1));
-   // Serial.println("\n" + c);
     Serial.println(c);
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
     int bomb = doc["bomb"];
     int led = doc["led"];
-    //Serial.println("\n 2:" + c + "\n");
 
-    
     Serial.println(String(bomb));
     Serial.println(String(led));
     
