@@ -8,7 +8,7 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 EthernetClient client;
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "GET"; // or "POST"
-String   HOST_NAME = "2ca7c3525874.ngrok.io"; 
+char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; 
 String PATH_NAME   = "/api/teste/get";
 
 // Led
@@ -30,7 +30,8 @@ void setup ()
 
 void loop()
 {
-    post_server();
+    //post_server();
+    get_server();
     delay(60000);
 }
 
@@ -45,7 +46,7 @@ void post_server()
         fill_data_send(&data_send);
         Serial.println(data_send);
         client.println("POST " + PATH_NAME + " HTTP/1.1");
-        client.println("Host: " + HOST_NAME);
+        client.println("Host: " + String(HOST_NAME));
         client.println("Content-Type: application/json");
         client.println("Content-Length: " + String(data_send.length()));
         client.println("Connection: close");
@@ -54,7 +55,7 @@ void post_server()
         client.println(data_send);      
     }
 }
-/*
+
 void get_server()
 {
     client.stop();
@@ -64,8 +65,15 @@ void get_server()
 
         client.println("GET " + PATH_NAME + " HTTP/1.1");
         client.println("Host: " + String(HOST_NAME));
+        client.println("Connection: close");
+        client.println(); // end HTTP heade r
+        while(client.connected()) {
+            if(client.available()){
+                Serial.print(client.read());
+            }     
+        }
     }
-}*/
+}
 
 void fill_data_send(String *data_send)
 {
