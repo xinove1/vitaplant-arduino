@@ -11,10 +11,15 @@ String HTTP_METHOD = "GET"; // or "POST"
 char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; 
 String PATH_NAME   = "/api/teste/get";
 
+// Led
+int LED[3] = {0, 0, 0};
+int SensorHL = A0;
+//int rele = 7;
 
 void setup ()
 {
     Serial.begin(9600);
+    //pinMode(rele, OUTPUT);
 
     if (Ethernet.begin(mac) == 0) 
     {
