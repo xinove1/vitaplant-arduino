@@ -67,11 +67,15 @@ void get_server()
         client.println("Host: " + String(HOST_NAME));
         client.println("Connection: close");
         client.println(); // end HTTP heade r
+        
+        String s = "";
         while(client.connected()) {
             if(client.available()){
-                Serial.print(client.read());
+                char c = client.read();
+                s += c; 
             }     
         }
+        Serial.println(s);
     }
 }
 
