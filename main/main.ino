@@ -36,7 +36,7 @@ void setup ()
 
 void loop()
 {
-    //post_server();
+    post_server();
     get_server();
     delay(60000);
 }
