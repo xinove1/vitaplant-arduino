@@ -89,14 +89,14 @@ void get_server()
         StaticJsonDocument<200> doc;
         deserializeJson(doc, s);
         int bomba = doc["bomb"];
-        int ledR = doc["ledR"];
-        int ledG = doc["ledG"];
-        int ledB = doc["ledB"];
+        LED[0] = doc["ledR"];
+        LED[1] = doc["ledG"];
+        LED[2] = doc["ledB"];
         Serial.println("Bomba" + String(bomba));
-        Serial.println("LedR :" + String(ledR));
-        Serial.println("LedG :" + String(ledG));
-        Serial.println("LedB :" + String(ledB));
-        bomba_ligar(bomba);
+        Serial.println("LedR :" + String(LED[0]));
+        Serial.println("LedG :" + String(LED[1]));
+        Serial.println("LedB :" + String(LED[2]));
+        //bomba_ligar(bomba);
         
     }
 }
@@ -108,6 +108,13 @@ void bomba_ligar(int milisec)
     digitalWrite(rele, LOW);
 } 
 
+void led_liga(void)
+{
+    Serial.println("---------------------------------");
+    Serial.println("LedR :" + String(LED[0]));
+    Serial.println("LedG :" + String(LED[1]));
+    Serial.println("LedB :" + String(LED[2]));
+}
 
 void fill_data_send(String *data_send)
 {
