@@ -92,17 +92,17 @@ void get_server()
         LED[0] = doc["ledR"];
         LED[1] = doc["ledG"];
         LED[2] = doc["ledB"];
-        Serial.println("Bomba" + String(bomba));
-        Serial.println("LedR :" + String(LED[0]));
-        Serial.println("LedG :" + String(LED[1]));
-        Serial.println("LedB :" + String(LED[2]));
-        //bomba_ligar(bomba);
+        Serial.println("---------------------------------");
+
+        bomba_ligar(bomba);
+        led_liga();
         
     }
 }
 
 void bomba_ligar(int milisec)
 {
+    Serial.println("Bomba" + String(bomba));
     digitalWrite(rele, HIGH);
     delay(milisec);
     digitalWrite(rele, LOW);
@@ -110,10 +110,13 @@ void bomba_ligar(int milisec)
 
 void led_liga(void)
 {
-    Serial.println("---------------------------------");
     Serial.println("LedR :" + String(LED[0]));
     Serial.println("LedG :" + String(LED[1]));
     Serial.println("LedB :" + String(LED[2]));
+    analogWrite(pinLedR, LED[0]);
+    analogWrite(pinLedG, LED[1]);
+    analogWrite(pinLedB, LED[2]);
+
 }
 
 void fill_data_send(String *data_send)
