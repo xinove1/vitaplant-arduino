@@ -36,12 +36,12 @@ void setup ()
 
 void loop()
 {
-    post_server();
-    get_server();
+    if(post_server())
+        get_server();
     delay(60000);
 }
 
-void post_server()
+int post_server()
 {
     client.stop();
     if(client.connect(HOST_NAME, HTTP_PORT)) {
@@ -59,6 +59,25 @@ void post_server()
         client.println(); // end HTTP header
 
         client.println(data_send);      
+        String c ;
+        while(client.connected()) 
+        {
+            if(client.available())
+            {
+                // read an incoming byte from the server and print it to serial monitor:
+                char ca = client.read();
+                c += ca;
+            }
+        }
+        if(parse_http(c) == "201")
+        {
+            return(1);
+        }
+        else
+        {
+
+            return(0);
+        }
     }
 }
 
@@ -134,4 +153,39 @@ void fill_data_send(String *data_send)
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
+}
+
+String    parse_http(String c)
+{
+    int beg = 0;
+    int i = 0;
+    int j = 0;
+    String dest[4];
+    while (c[i] != '\n')
+    {
+        if (c[i] == ' ')
+        {
+            c[i] = '\0';
+            dest[j] = fill(&c[beg]);
+            j++; 
+            i = i + 1;
+            beg = i;
+            continue;
+        }
+        i++;
+    }
+    return(dest[1]);
+}
+
+String    fill(char *c)
+{
+    //char cc[20];
+    int i = 0;
+    char dest[3];
+    while (c[i] && i < 3)
+    {
+        dest[i] = c[i];
+        i++;
+    }
+    return (dest);
 }
