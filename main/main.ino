@@ -108,7 +108,6 @@ void bomba(int milisec)
     digitalWrite(rele, LOW);
 } 
 
-void ledRGB()
 
 void fill_data_send(String *data_send)
 {
