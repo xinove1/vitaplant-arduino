@@ -41,6 +41,7 @@ void loop() {
     send_data();
     delay(15000);
   }
+  Serial.println("receive");
   receive_data();
 }
 
@@ -86,7 +87,6 @@ void send_data(void)
 
 void receive_data(void)
 {
-  Serial.println("A R D U I N O");
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
