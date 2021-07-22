@@ -15,9 +15,9 @@ String PATH_NAME   = "/api/teste/get";
 int LED[3] = {0, 0, 0};
 int SensorHL = A0;
 int rele = 7;
-int pinLedR = 11;
-int pinLedG = 12;
-int pinLedB = 13;
+int pinLedR = 8;
+int pinLedG = 9;
+int pinLedB = 10;
 
 void setup ()
 {
@@ -27,11 +27,11 @@ void setup ()
     pinMode(pinLedG, OUTPUT);
     pinMode(pinLedB, OUTPUT);
 
-    /*if (Ethernet.begin(mac) == 0) 
+    if (Ethernet.begin(mac) == 0) 
     {
         Serial.println("Failed to obtaining an IP address using DHCP");
         while(true);
-    }*/
+    }
 }
 
 void loop()
