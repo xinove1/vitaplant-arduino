@@ -36,7 +36,7 @@ void post_server()
     
       Serial.println("Connected to server");
 
-      String data_send = "{\"led\":10, \"humidity\":10}";
+      String data_send = "{\"ledR\":10, \"ledG\":20, \"ledB\":230, \"humidity\":10}";
       //fill_data_send(&data_send);
 
       client.println("POST " + PATH_NAME + " HTTP/1.1");
