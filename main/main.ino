@@ -96,12 +96,12 @@ void get_server()
         Serial.println("LedR :" + String(ledR));
         Serial.println("LedG :" + String(ledG));
         Serial.println("LedB :" + String(ledB));
-        
+        bomba_ligar(bomba);
         
     }
 }
 
-void bomba(int milisec)
+void bomba_ligar(int milisec)
 {
     digitalWrite(rele, HIGH);
     delay(milisec);
