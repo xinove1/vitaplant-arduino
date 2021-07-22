@@ -43,6 +43,7 @@ void loop() {
   
   if (httpResParsed == "201")
   {
+     Serial.println("inside if parsed:" + httpResParsed);
     receive_data();
   }
   delay(60000);
@@ -89,6 +90,7 @@ String send_data(void)
 
 void receive_data(void)
 {
+  Serial.println("A R D U I N O");
   if(client.connect(HOST_NAME, HTTP_PORT)) {
       
       // if connected:
