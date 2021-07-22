@@ -78,11 +78,19 @@ void get_server()
                 if (i == 1)   { s += c; }
             }     
         }
+        s += '}';
         Serial.println(s);
-        StaticJsonDocument<1000> doc;
+        StaticJsonDocument<200> doc;
         deserializeJson(doc, s);
         int bomba = doc["bomb"];
-        Serial.println(String(bomba));
+        int ledR = doc["ledR"];
+        int ledG = doc["ledG"];
+        int ledB = doc["ledB"];
+        Serial.println("Bomba" + String(bomba));
+        Serial.println("LedR :" + String(ledR));
+        Serial.println("LedG :" + String(ledG));
+        Serial.println("LedB :" + String(ledB));
+        
         
     }
 }
