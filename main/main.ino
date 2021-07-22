@@ -14,12 +14,18 @@ String PATH_NAME   = "/api/teste/get";
 // Led
 int LED[3] = {0, 0, 0};
 int SensorHL = A0;
-//int rele = 7;
+int rele = 7;
+int pinLedR = 11;
+int pinLedG = 12;
+int pinLedB = 13;
 
 void setup ()
 {
     Serial.begin(9600);
-    //pinMode(rele, OUTPUT);
+    pinMode(rele, OUTPUT);
+    pinMode(pinLedR, OUTPUT);
+    pinMode(pinLedG, OUTPUT);
+    pinMode(pinLedB, OUTPUT);
 
     if (Ethernet.begin(mac) == 0) 
     {
@@ -94,6 +100,15 @@ void get_server()
         
     }
 }
+
+void bomba(int milisec)
+{
+    digitalWrite(rele, HIGH);
+    delay(milisec);
+    digitalWrite(rele, LOW);
+} 
+
+void ledRGB()
 
 void fill_data_send(String *data_send)
 {
