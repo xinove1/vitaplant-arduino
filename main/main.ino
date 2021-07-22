@@ -16,7 +16,7 @@ struct dataReceive {
 };*/
 
 int    HTTP_PORT   = 80;
-String HTTP_METHOD = "POST"; // or "POST"
+String HTTP_METHOD = "GET"; // or "POST"
 char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; // hostname of web server:
 String PATH_NAME   = "/api/teste/get";
 
@@ -36,13 +36,10 @@ void setup() {
 
 void loop() {
 
-  for (int i = 0; i < 5; i++)
-  {
-    send_data();
-    delay(15000);
-  }
-  Serial.println("receive");
+  send_data();
+  delay(5000);
   receive_data();
+  delay(40000);
 }
 
 
@@ -86,41 +83,53 @@ void send_data(void)
 
 void receive_data()
 {
-  if(client.connect(HOST_NAME, HTTP_PORT)) {
-      
-      // if connected:
-      //Serial.println("Connected to server");
+if(client.connect(HOST_NAME, HTTP_PORT)) {
+    
+    // if connected:
+    Serial.println("Connected to server");
+    
+    // make a HTTP request:
+    // send HTTP header
+    client.println(HTTP_METHOD + " " + PATH_NAME + " HTTP/1.1");
+    client.println("Host: " + String(HOST_NAME));
+    client.println("Connection: close");
+    client.println(); // end HTTP header
 
-      // make a HTTP request:
-      // send HTTP header
-      client.println("GET " + PATH_NAME + " HTTP/1.1");
-      client.println("Host: " + String(HOST_NAME));
-      client.println("Connection: close");
-      client.println(); // end HTTP header
-
-      String c = "";    
-      while(client.connected()) {
-        if(client.available()){
-          // read an incoming byte from the server and print it to serial monitor:
-          char ca = client.read();
-          c += ca;
-        }
+    Data DadosServer;
+    String c ;
+    
+    while(client.connected()) {
+      if(client.available()){
+        // read an incoming byte from the server and print it to serial monitor:
+        char ca = client.read();
+        c += ca;
       }
-    Serial.println(c);
+     
+    }
+
+    //int a = c.indexOf("{");
+    //int b = c.indexOf("}");
+   
+    
+    //Serial.println(c.substring(a, b+1));
+    Serial.println("\n" + c + "\n");
     StaticJsonDocument<1000> doc;
     deserializeJson(doc, c);
-    int bomb = doc["bomb"];
-    int led = doc["led"];
+    DadosServer.bomba = doc["bomba"];
+    DadosServer.led = doc["led"];
+    Serial.println("\n 2:" + c + "\n");
 
-    Serial.println(String(bomb));
-    Serial.println(String(led));
+    //Serial.print(DadosServer.bomba);
+    //Serial.print(DadosServer.led);
     
     // the server's disconnected, stop the client:
     client.stop();
+    Serial.println();
     Serial.println("disconnected");
   } else {// if not connected:
     Serial.println("connection failed");
   }
+  
 }
 
 void fill_data_send(String *data_send)
