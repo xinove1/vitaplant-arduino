@@ -73,9 +73,9 @@ void get_server()
         while(client.connected()) {
             if(client.available()){
                 char c = client.read();
-                if (c == '{') i = 1;
-                else if (c == '}') i = 0;
-                if (i) s += c; 
+                if (c == '{') { i = 1; }
+                if (c == '}') { i = 0; }
+                if (i == 1)   { s += c; }
             }     
         }
         Serial.println(s);
