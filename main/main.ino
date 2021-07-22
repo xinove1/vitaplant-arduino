@@ -69,12 +69,16 @@ void get_server()
         client.println(); // end HTTP heade r
         
         String s = "";
+        int i = 0;
         while(client.connected()) {
             if(client.available()){
                 char c = client.read();
-                s += c; 
+                if (c == '{') i = 1;
+                else if (c == '}') i = 0;
+                if (i) s += c; 
             }     
         }
+        Serial.println(s);
         StaticJsonDocument<1000> doc;
         deserializeJson(doc, s);
         int bomba = doc["bomb"];
