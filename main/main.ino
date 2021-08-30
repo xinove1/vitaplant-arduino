@@ -8,7 +8,7 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 EthernetClient client;
 int    HTTP_PORT   = 80;
 String HTTP_METHOD = "GET"; // or "POST"
-char   HOST_NAME[] = "2ca7c3525874.ngrok.io"; 
+char   HOST_NAME[] = "08df-2001-1284-f016-3b60-6494-80d4-dc64-7b53.ngrok.io";
 String PATH_NAME   = "/api/teste/get";
 
 // Led
@@ -69,15 +69,10 @@ int post_server()
                 c += ca;
             }
         }
-        if(parse_http(c) == "201")
-        {
+        // if(parse_http(c) == "201")
+        //     return(1);
+        // else
             return(1);
-        }
-        else
-        {
-
-            return(0);
-        }
     }
 }
 
@@ -141,10 +136,7 @@ void led_liga(void)
 void fill_data_send(String *data_send)
 {
     //valores led teste, por coisa global?
-    LED[0] = 10;
-    LED[1] = 20;
-    LED[2] = 30;
-    *data_send = String("{\"ledR\":") 
+    *data_send = String("{\"ledR\":")
                + String(LED[0]) 
                +",\"ledG\":" 
                + String(LED[1])
