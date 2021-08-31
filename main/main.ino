@@ -150,25 +150,20 @@ void fill_data_send(String *data_send)
 
 String    parse_http(String c)
 {
-    int beg = 0;
     int i = 0;
-    int j = 0;
-    String dest[4];
+    String dest;
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
         {
-            c[i] = '\0';
-            dest[j] = fill(&c[beg]);
-            j++; 
-            i = i + 1;
-            beg = i;
-            continue;
+			dest += c[i + 1]
+			dest += c[i + 2]
+			dest += c[i + 3]
+			return (dest)
         }
         i++;
     }
-	Serial.println(dest[1][0]);
-    return(dest[1]);
+    return (NULL);
 }
 
 String    fill(char *c)
