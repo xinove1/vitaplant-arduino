@@ -69,10 +69,11 @@ int post_server()
                 c += ca;
             }
         }
-        // if(parse_http(c) == "201")
-        //     return(1);
-        // else
-            return(1);
+		Serial.println("|" + parse_http(c) + "|");
+         if(parse_http(c) == "201")
+             return(1);
+         else
+            return(0);
     }
 }
 
@@ -153,6 +154,7 @@ String    parse_http(String c)
     int i = 0;
     int j = 0;
     String dest[4];
+	while(c[i] )
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
@@ -166,7 +168,7 @@ String    parse_http(String c)
         }
         i++;
     }
-    return(dest[1]);
+    return(dest[1][0] + dest[1][1] + dest[1][2]);
 }
 
 String    fill(char *c)
