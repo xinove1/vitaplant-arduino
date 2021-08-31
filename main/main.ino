@@ -136,9 +136,9 @@ void led_liga(void)
 
 void fill_data_send(String *data_send)
 {
-	char ledR[3];
-	char ledG[3];
-	char ledB[3];
+	char ledR[4];
+	char ledG[4];
+	char ledB[4];
 	itoa(LED[0], ledR, 10);
 	itoa(LED[1], ledG, 10);
 	itoa(LED[2], ledB, 10);
