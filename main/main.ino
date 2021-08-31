@@ -142,12 +142,13 @@ void fill_data_send(String *data_send)
 	itoa(LED[0], ledR, 10);
 	itoa(LED[1], ledG, 10);
 	itoa(LED[2], ledB, 10);
+	Serial.println(ledG);
     *data_send = String("{\"ledR\":")
-               + ledR
+               + String(ledR)
                +",\"ledG\":" 
-               + ledG
+               + String(ledG)
                +",\"ledB\":"
-               + ledB
+               + String(ledB)
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
