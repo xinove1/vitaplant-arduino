@@ -69,8 +69,8 @@ int post_server()
                 c += ca;
             }
         }
+		Serial.println(c);
 		Serial.println("|" + parse_http(c) + "|");
-		Serial.println("|" + c + "|");
          if(parse_http(c) == "201")
              return(1);
          else
@@ -137,7 +137,6 @@ void led_liga(void)
 
 void fill_data_send(String *data_send)
 {
-    //valores led teste, por coisa global?
     *data_send = String("{\"ledR\":")
                + String(LED[0]) 
                +",\"ledG\":" 
@@ -155,7 +154,6 @@ String    parse_http(String c)
     int i = 0;
     int j = 0;
     String dest[4];
-	while(c[i] )
     while (c[i] != '\n')
     {
         if (c[i] == ' ')
@@ -169,12 +167,12 @@ String    parse_http(String c)
         }
         i++;
     }
+	Serial.println(dest[1][0]);
     return(dest[1]);
 }
 
 String    fill(char *c)
 {
-    //char cc[20];
     int i = 0;
     char dest[3];
     while (c[i] && i < 3)
