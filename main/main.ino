@@ -136,19 +136,13 @@ void led_liga(void)
 
 void fill_data_send(String *data_send)
 {
-	char ledR[4];
-	char ledG[4];
-	char ledB[4];
-	itoa(LED[0], ledR, 10);
-	itoa(LED[1], ledG, 10);
-	itoa(LED[2], ledB, 10);
-	Serial.println(ledG);
+	//Serial.println(ledG);
     *data_send = String("{\"ledR\":")
-               + String(ledR)
+               + String(LED[0])
                +",\"ledG\":" 
-               + String(ledG)
+               + String(LED[1])
                +",\"ledB\":"
-               + String(ledB)
+               + String(LED[2])
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
