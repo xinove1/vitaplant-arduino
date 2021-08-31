@@ -69,7 +69,6 @@ int post_server()
                 c += ca;
             }
         }
-		Serial.println(c);
 		Serial.println("|" + parse_http(c) + "|");
          if(parse_http(c) == "201")
              return(1);
@@ -101,7 +100,7 @@ void get_server()
             }     
         }
         s += '}';
-        Serial.println(s);
+        Serial.println("string get: " + s);
         StaticJsonDocument<200> doc;
         deserializeJson(doc, s);
         int bomba = doc["bomb"];
@@ -137,12 +136,13 @@ void led_liga(void)
 
 void fill_data_send(String *data_send)
 {
+	char buffer[3];
     *data_send = String("{\"ledR\":")
-               + String(LED[0]) 
+               + atoi(LED[0], buffer, 10)
                +",\"ledG\":" 
-               + String(LED[1])
-               +",\"ledB\":" 
-               + String(LED[2])
+               + atoi(LED[1], buffer, 10)
+               +",\"ledB\":"
+               + atoi(LED[2], buffer, 10)
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
@@ -156,24 +156,12 @@ String    parse_http(String c)
     {
         if (c[i] == ' ')
         {
-			dest += c[i + 1]
-			dest += c[i + 2]
-			dest += c[i + 3]
-			return (dest)
+			dest += c[i + 1];
+			dest += c[i + 2];
+			dest += c[i + 3];
+			return (dest);
         }
         i++;
     }
-    return (NULL);
-}
-
-String    fill(char *c)
-{
-    int i = 0;
-    char dest[3];
-    while (c[i] && i < 3)
-    {
-        dest[i] = c[i];
-        i++;
-    }
-    return (dest);
+    return ("No");
 }
