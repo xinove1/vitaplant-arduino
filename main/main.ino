@@ -138,11 +138,11 @@ void fill_data_send(String *data_send)
 {
 	char buffer[3];
     *data_send = String("{\"ledR\":")
-               + atoi(LED[0], buffer, 10)
+               + itoa(LED[0], buffer, 10)
                +",\"ledG\":" 
-               + atoi(LED[1], buffer, 10)
+               + itoa(LED[1], buffer, 10)
                +",\"ledB\":"
-               + atoi(LED[2], buffer, 10)
+               + itoa(LED[2], buffer, 10)
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
