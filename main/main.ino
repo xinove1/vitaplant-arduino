@@ -3,6 +3,8 @@
 #include <ArduinoJson.h>
 #include <string.h>
 
+String    fill(char *c);
+
 //Pre setup ethernet
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 EthernetClient client;
@@ -70,6 +72,7 @@ int post_server()
             }
         }
 		Serial.println("|" + parse_http(c) + "|");
+		Serial.println("|" + c + "|");
          if(parse_http(c) == "201")
              return(1);
          else
@@ -168,7 +171,8 @@ String    parse_http(String c)
         }
         i++;
     }
-    return(dest[1][0] + dest[1][1] + dest[1][2]);
+	String str = String(dest[1][0]) + String(dest[1][1]) + String(dest[1][2]);
+    return(str);
 }
 
 String    fill(char *c)
