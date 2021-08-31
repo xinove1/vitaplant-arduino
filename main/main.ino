@@ -12,7 +12,6 @@ char   HOST_NAME[] = "08df-2001-1284-f016-3b60-6494-80d4-dc64-7b53.ngrok.io";
 String PATH_NAME   = "/api/teste/get";
 
 // Led
-int LED[3] = {0, 0, 0};
 int SensorHL = A0;
 int rele = 7;
 int pinLedR = 8;
@@ -21,13 +20,14 @@ int pinLedB = 10;
 
 void setup ()
 {
+	int LED[3] = {0, 0, 0};
     Serial.begin(9600);
     pinMode(rele, OUTPUT);
     pinMode(pinLedR, OUTPUT);
     pinMode(pinLedG, OUTPUT);
     pinMode(pinLedB, OUTPUT);
 
-    if (Ethernet.begin(mac) == 0) 
+    if (Ethernet.begin(mac) == 0)
     {
         Serial.println("Failed to obtaining an IP address using DHCP");
         while(true);
