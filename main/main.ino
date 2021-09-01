@@ -12,6 +12,7 @@ char   HOST_NAME[] = "08df-2001-1284-f016-3b60-6494-80d4-dc64-7b53.ngrok.io";
 String PATH_NAME   = "/api/teste/get";
 
 // Led
+int LED[3];
 int SensorHL = A0;
 int rele = 7;
 int pinLedR = 8;
@@ -20,6 +21,9 @@ int pinLedB = 10;
 
 void setup ()
 {
+	LED[0] = 10;
+	LED[1] = 10;
+	LED[2] = 12;
     Serial.begin(9600);
     pinMode(rele, OUTPUT);
     pinMode(pinLedR, OUTPUT);
@@ -35,13 +39,12 @@ void setup ()
 
 void loop()
 {
-	int led[3] = {0, 0, 0};
-    if(post_server(led))
-        get_server(&led);
+    if(post_server())
+        get_server();
     delay(60000);
 }
 
-int post_server(int led[3])
+int post_server()
 {
     client.stop();
     if(client.connect(HOST_NAME, HTTP_PORT)) {
@@ -49,7 +52,7 @@ int post_server(int led[3])
         Serial.println("Connected to server post");
 
         String data_send;
-        fill_data_send(&data_send, led);
+        fill_data_send(&data_send);
         Serial.println(data_send);
         client.println("POST " + PATH_NAME + " HTTP/1.1");
         client.println("Host: " + String(HOST_NAME));
@@ -77,7 +80,7 @@ int post_server(int led[3])
     }
 }
 
-void get_server(int *led[3])
+void get_server()
 {
     client.stop();
     if(client.connect(HOST_NAME, HTTP_PORT))
@@ -104,13 +107,13 @@ void get_server(int *led[3])
         StaticJsonDocument<200> doc;
         deserializeJson(doc, s);
         int bomba = doc["bomb"];
-        *led[0] = doc["ledR"];
-        *led[1] = doc["ledG"];
-        *led[2] = doc["ledB"];
+        LED[0] = doc["ledR"];
+        LED[1] = doc["ledG"];
+        LED[2] = doc["ledB"];
         Serial.println("---------------------------------");
 
         bomba_ligar(bomba);
-        led_liga(*led);
+        led_liga();
         
     }
 }
@@ -123,26 +126,26 @@ void bomba_ligar(int milisec)
     digitalWrite(rele, LOW);
 } 
 
-void led_liga(int led[3])
+void led_liga(void)
 {
-    Serial.println("LedR :" + String(led[0]));
-    Serial.println("LedG :" + String(led[1]));
-    Serial.println("LedB :" + String(led[2]));
-    analogWrite(pinLedR, led[0]);
-    analogWrite(pinLedG, led[1]);
-    analogWrite(pinLedB, led[2]);
+    Serial.println("LedR :" + String(LED[0]));
+    Serial.println("LedG :" + String(LED[1]));
+    Serial.println("LedB :" + String(LED[2]));
+    analogWrite(pinLedR, LED[0]);
+    analogWrite(pinLedG, LED[1]);
+    analogWrite(pinLedB, LED[2]);
 
 }
 
-void fill_data_send(String *data_send, int led[3])
+void fill_data_send(String *data_send)
 {
 	//Serial.println(ledG);
     *data_send = String("{\"ledR\":")
-               + String(led[0])
+               + String(LED[0])
                +",\"ledG\":" 
-               + String(led[1])
+               + String(LED[1])
                +",\"ledB\":"
-               + String(led[2])
+               + String(LED[2])
                + ",\"humidity\":"
                + String(analogRead(SensorHL))
                + "}";
