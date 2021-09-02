@@ -135,3 +135,21 @@ void fill_data_send(String *data_send)
                + String(analogRead(SensorHL))
                + "}";
 }
+
+String    parse_http(String c)
+{
+    int i = 0;
+    String dest;
+    while (c[i] != '\n')
+    {
+        if (c[i] == ' ')
+        {
+			dest += c[i + 1];
+			dest += c[i + 2];
+			dest += c[i + 3];
+			return (dest);
+        }
+        i++;
+    }
+    return ("No");
+}
