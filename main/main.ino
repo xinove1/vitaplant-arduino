@@ -67,13 +67,14 @@ void get_server()
     client.stop();
     if(client.connect(HOST_NAME, HTTP_PORT))
     {
+        Serial.println("---------------------------------");
         Serial.println("connected to server get");
 
         client.println("GET " + PATH_NAME + " HTTP/1.1");
         client.println("Host: " + String(HOST_NAME));
         client.println("Connection: close");
         client.println(); // end HTTP heade r
-        
+
         String s = "";
         int i = 0;
         while(client.connected()) {
@@ -82,7 +83,7 @@ void get_server()
                 if (c == '{') { i = 1; }
                 if (c == '}') { i = 0; }
                 if (i == 1)   { s += c; }
-            }     
+            }
         }
         s += '}';
         Serial.println(s);
@@ -92,7 +93,6 @@ void get_server()
         LED[0] = doc["ledR"];
         LED[1] = doc["ledG"];
         LED[2] = doc["ledB"];
-        Serial.println("---------------------------------");
 
         bomba_ligar(bomba);
         led_liga();
@@ -121,7 +121,6 @@ void led_liga(void)
 
 void fill_data_send(String *data_send)
 {
-    //valores led teste, por coisa global?
     *data_send = String("{\"ledR\":")
                + String(LED[0]) 
                +",\"ledG\":" 
