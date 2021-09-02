@@ -39,8 +39,8 @@ void setup ()
 
 void loop()
 {
-    if(post_server())
-        get_server();
+	post_server();
+    get_server();
     delay(60000);
 }
 
@@ -62,20 +62,20 @@ int post_server()
         client.println(); // end HTTP header
 
         client.println(data_send);      
-        String c ;
-        while(client.connected()) 
-        {
-            if(client.available())
-            {
-                // read an incoming byte from the server and print it to serial monitor:
-                char ca = client.read();
-                c += ca;
-            }
-        }
-		Serial.println("|" + parse_http(c) + "|");
-         if(parse_http(c) == "201")
-             return(1);
-         else
+        // String c ;
+        // while(client.connected())
+        // {
+        //     if(client.available())
+        //     {
+        //         // read an incoming byte from the server and print it to serial monitor:
+        //         char ca = client.read();
+        //         c += ca;
+        //     }
+        // }
+		// Serial.println("|" + parse_http(c) + "|");
+        //  if(parse_http(c) == "201")
+        //      return(1);
+        //  else
             return(0);
     }
 }
