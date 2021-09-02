@@ -122,10 +122,7 @@ void led_liga(void)
 void fill_data_send(String *data_send)
 {
     //valores led teste, por coisa global?
-    LED[0] = 10;
-    LED[1] = 20;
-    LED[2] = 30;
-    *data_send = String("{\"ledR\":") 
+    *data_send = String("{\"ledR\":")
                + String(LED[0]) 
                +",\"ledG\":" 
                + String(LED[1])
